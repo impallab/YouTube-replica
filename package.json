@@ -1,6 +1,7 @@
 {
   "name": "youtube-replica",
   "private": true,
+  "proxy": "https://youtube.googleapis.com",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
