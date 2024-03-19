@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import VideoCart from './VideoCart';
-
+import { NavLink } from 'react-router-dom';
 const Videos = () => {
     const [allVideos, setAllVideos] = useState([]);
 
@@ -24,7 +24,9 @@ const Videos = () => {
             {
                 allVideos.map((video) => {
                     return (
-                        <VideoCart key={video.id} props={video} />
+                        <NavLink className={`flex`} to="/watch" key={video.id}>
+                            <VideoCart props={video} />
+                        </NavLink>
                     )
                 })
             }
