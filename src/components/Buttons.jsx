@@ -8,7 +8,7 @@ const Buttons = () => {
   return (
     categories.map((buttonName, index) => {
       return (
-        < div key={index} className='mt-20 mx-2  font-medium bg-white/20 py-1 px-2 rounded-md' >{buttonName}</div>
+        < div key={index} className='mt-24 mx-2  font-medium bg-white/20 py-1 px-2 rounded-md' >{buttonName}</div>
       )
     })
   )

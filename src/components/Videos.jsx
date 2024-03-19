@@ -1,11 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from "axios";
+import VideoCart from './VideoCart';
 
 const Videos = () => {
+    const [allVideos, setAllVideos] = useState([]);
+
     const fetchVideos = async () => {
         try {
             const videosData = await axios.get(`${import.meta.env.VITE_YOUTUBE_VIDEO_API_URL}+${import.meta.env.VITE_YOUTUBE_VIDEO_API_KEY}`);
-            console.log(videosData.data);
+            // console.log(videosData?.data?.items);
+            setAllVideos(videosData?.data?.items || []);
         } catch (error) {
             console.log("Failed to fetch data : ", error);
         }
@@ -13,9 +17,19 @@ const Videos = () => {
 
     useEffect(() => {
         fetchVideos();
-    }, []);
+    }, [import.meta.env.VITE_YOUTUBE_VIDEO_API_URL, import.meta.env.VITE_YOUTUBE_VIDEO_API_KEY]);
 
-    return <div></div>;
+    return (
+        <div className={`w-full grid grid-cols-4 gap-6 `}>
+            {
+                allVideos.map((video) => {
+                    return (
+                        <VideoCart key={video.id} props={video} />
+                    )
+                })
+            }
+        </div>
+    );
 };
 
 export default Videos;
