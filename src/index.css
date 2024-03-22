@@ -2,12 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
+/* scrolbar style */
 ::-webkit-scrollbar {
     background-color: transparent;
     width: 0.5rem;
 }
 
-::-webkit-scrollbar-thumb {
+.sidebar::-webkit-scrollbar-thumb {
+    height: 4rem !important;
     background: linear-gradient(to bottom, red, cyan);
     border-radius: 1rem;
+}
+
+/* iframe border style */
+@keyframes borderAnimation {
+    0% {
+        border-color: red;
+    }
+
+    25% {
+        border-color: blue;
+    }
+
+    50% {
+        border-color: cyan;
+    }
+
+    60% {
+        border-color: rgb(218, 204, 11);
+    }
+
+    70% {
+        border-color: rgb(48, 228, 8);
+    }
+
+    80% {
+        border-color: rgb(255, 255, 255);
+    }
+
+    100% {
+        border-color: red;
+    }
+}
+
+.animated-border {
+    padding: 0.01rem;
+    border-bottom: 1px solid;
+    /* Set a solid border */
+    animation: borderAnimation 6s infinite linear;
+    /* Apply the animation */
 }

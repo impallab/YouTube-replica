@@ -6,5 +6,18 @@ import Sidebar from "./Sidebar";
 import VideoCart from "./VideoCart";
 import Videos from "./Videos";
 import Watch from "./Watch";
+import Subscription from "../Subscription.jsx";
+import Shorts from "./Shorts.jsx";
 
-export { Buttons, Feed, Home, Navbar, Sidebar, VideoCart, Videos, Watch }
+export {
+    Buttons,
+    Feed,
+    Home,
+    Navbar,
+    Sidebar,
+    VideoCart,
+    Videos,
+    Watch,
+    Subscription,
+    Shorts
+}
