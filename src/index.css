@@ -8,8 +8,9 @@
     width: 0.5rem;
 }
 
+.livechat::-webkit-scrollbar-thumb,
 .sidebar::-webkit-scrollbar-thumb {
-    height: 4rem !important;
+     height: 3rem; /* not working for sidebar scrollbar height  */
     background: linear-gradient(to bottom, red, cyan);
     border-radius: 1rem;
 }

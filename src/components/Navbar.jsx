@@ -36,7 +36,7 @@ export default function Navbar() {
             <div className='flex items-center m-3 space-x-8 text-2xl cursor-pointer'>
                 <GiVideoCamera />
                 <MdNotificationsActive />
-                <Avatar src='https://scontent.fccu2-3.fna.fbcdn.net/v/t39.30808-6/431009268_1819586721819559_8166665112089281255_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=dwa9jr6zd6MAX9vidLj&_nc_ht=scontent.fccu2-3.fna&oh=00_AfCgty3rnBawvUcJMljdNpHpBxv5at0FPkzySeCL42D9UQ&oe=65F9A82F' size="30" className='rounded-full' />
+                <Avatar src='https://scontent.fccu2-3.fna.fbcdn.net/v/t39.30808-6/431009268_1819586721819559_8166665112089281255_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=cWH_0O7TysYAX-R77LY&_nc_ht=scontent.fccu2-3.fna&oh=00_AfDKcIsg6adqA4T9KBAZwXbVwO2mrkJjBHl9MTtUeCrF-A&oe=66038B6F' size="30" className='rounded-full' />
             </div>
 
         </div>

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState, useRef } from 'react';
 import Avatar from 'react-avatar';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import { BiSolidLike, BiSolidDislike } from "react-icons/bi";
 import { FaShare, FaEyeSlash } from "react-icons/fa";
@@ -13,16 +13,21 @@ import { GrSend } from "react-icons/gr";
 import EmojiPicker from 'emoji-picker-react';
 import { usePopper } from 'react-popper';
 import LiveChat from './LiveChat';
+import { setMessages } from '../utils/liveChatSlice';
 
 function Watch() {
     const isOpen = useSelector((store) => store.app.isOpen);
     const [searchParams] = useSearchParams();
     const videoId = searchParams.get("v");
     const [watchVideo, setWatchVideo] = useState(null);
+    const [likeClicked, setLikeClicked] = useState(false);
+    const [dislikeClicked, setDislikeClicked] = useState(false);
     const [showChat, setShowChat] = useState(false);
     const [showEmojiPicker, setShowEmojiPicker] = useState(false);
-    const [value, setValue] = useState('');
+    const [message, setMessage] = useState('');
     const inputRef = useRef(null); // Reference to the input field
+    const dispatch = useDispatch()
+
 
     // Popper configuration
     const [referenceElement, setReferenceElement] = useState(null);
@@ -65,14 +70,30 @@ function Watch() {
         setShowEmojiPicker(!showEmojiPicker);
     };
 
-    const handleChange = (event) => {
-        setValue(event.target.value);
+    const sendMessage = (event) => {
+        setMessage(event.target.value);
+        dispatch(setMessages({ // reducer created in the liveChatSlice.
+            name: "pallab",
+            messages: message
+        }));
+        setMessage(""); //function for set the value from input. 
     };
 
     const handleEmojiClick = (emojiObject) => {
-        setValue((prevValue) => prevValue + emojiObject.emoji);
+        setMessage((prevValue) => prevValue + emojiObject.emoji);
         setShowEmojiPicker(false); // Close the emoji picker after selecting an emoji
     };
+
+    const handleLikeClick = () => {
+        setLikeClicked(true);
+        setDislikeClicked(false);
+    };
+
+    const handleDislikeClick = () => {
+        setDislikeClicked(true);
+        setLikeClicked(false);
+    };
+
 
     return (
         <div className='flex w-[100%]'>
@@ -81,7 +102,7 @@ function Watch() {
                     <div className='inline-block  '>
                         <div className='animated-border rounded-lg'>
                             <iframe
-                                width="910"
+                                width="870"
                                 height="490"
                                 style={{ borderRadius: '15px' }}
                                 src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
@@ -113,8 +134,13 @@ function Watch() {
 
                             <div className='flex items-center'>
                                 <div className='flex bg-white/15 rounded-full p-2'>
-                                    <button className='flex font-semibold mr-3 ml-2 items-center gap-3 border-white/25 border-r-[0.5px] pr-3'><BiSolidLike size="24px" /> {formatCount(watchVideo?.statistics.likeCount || "0")}</button>
-                                    <button className='mr-2'><BiSolidDislike size="24px" /></button>
+                                    <button className={`flex font-semibold mr-3 ml-2 items-center gap-3 border-white/25 border-r-[0.5px] pr-3 ${likeClicked ? 'text-blue-500' : ''}`} onClick={handleLikeClick}>
+                                        <BiSolidLike size="24px" />
+                                        {formatCount(watchVideo?.statistics.likeCount || "0")}
+                                    </button>
+                                    <button className={`mr-2 ${dislikeClicked ? 'text-blue-500' : ''}`} onClick={handleDislikeClick}>
+                                        <BiSolidDislike size="24px" />
+                                    </button>
                                 </div>
                                 <button className='flex font-semibold items-center gap-2 mr-2 ml-2 bg-white/25 p-2 px-3 rounded-full'><FaShare />Share</button>
                                 <button className='flex font-semibold items-center gap-2 mr-2 bg-white/25 p-2 px-3 rounded-full'><IoMdDownload />Download</button>
@@ -128,7 +154,7 @@ function Watch() {
                 </div>
             </div>
 
-            <div className={`livechat text-center font-semibold cursor-pointer mr-4 w-[28%] h-fit border border-white/25 p-2 mt-20 rounded-2xl ${isOpen ? "ml-2 mr-6" : " mr-8 "}`}>
+            <div className={`text-center font-semibold cursor-pointer mr-4 w-[28%] h-fit border border-white/25 p-2 mt-20 rounded-2xl ${isOpen ? "ml-2 mr-6" : " mr-8 "}`}>
                 {!showChat && (
                     <div onClick={handleChatToggle}>
                         <h3>Show chat</h3>
@@ -148,8 +174,8 @@ function Watch() {
                                 </button>
                             </div>
                         </div>
-                        <div className=' overflow-y-auto h-[63vh] border-y bg-black/5 border-white/20 p-2'>
-                            <LiveChat/>
+                        <div className='livechat overflow-y-auto h-[63vh] border-y bg-black/5 border-white/20 p-2 flex flex-col-reverse'>
+                            <LiveChat />
                         </div>
                         <div className='justify-between flex pt-2 relative' >
                             <div className='bg-white/10 pt-2 mr-4 w-[85%] border border-white/25 rounded-full'>
@@ -158,8 +184,8 @@ function Watch() {
                                     name="chat"
                                     id="liveChat"
                                     className='bg-transparent mb-2 w-52 outline-none'
-                                    value={value}
-                                    onChange={handleChange}
+                                    value={message}
+                                    onChange={(e) => setMessage(e.target.value)}
                                     ref={inputRef}
                                 />
                                 <button className='ml-6' onClick={toggleEmojiPicker}>
@@ -177,7 +203,7 @@ function Watch() {
                                 </div>
                             </div>
                             <button className='bg-white/25 m-2 p-1.5 rounded-full'>
-                                <GrSend />
+                                <GrSend onClick={sendMessage} />
                             </button>
                         </div>
                     </div>
