@@ -2,22 +2,38 @@ import React, { useEffect, useState } from 'react';
 import VideoCart from './VideoCart';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-const Videos = () => {
-    const [allVideos, setAllVideos] = useState([]);
+import { useDispatch, useSelector } from "react-redux";
+import { setHomeVideos } from '../utils/appSlice';
 
+const Videos = () => {
+    const { allVideos, category } = useSelector((store) => store.app);
+    const dispatch = useDispatch()
     const fetchVideos = async () => {
         try {
             const videosData = await axios.get(`${import.meta.env.VITE_YOUTUBE_VIDEO_API_URL}${import.meta.env.VITE_YOUTUBE_VIDEO_API_KEY}`);
-            // console.log(videosData?.data?.items);
-            setAllVideos(videosData?.data?.items || []);
+            dispatch(setHomeVideos(videosData?.data?.items || []));
+            // console.log(videosData.data)
         } catch (error) {
             console.log("Failed to fetch data : ", error);
         }
     };
+    const fetchVideosByCategory = async () => {
+        try {
+            const categoriesVideoData = await axios.get(`${import.meta.env.VITE_YOUTUBE_VIDEO_BY_KEYWORD}${category}&type=video&key=${import.meta.env.VITE_YOUTUBE_VIDEO_API_KEY}`);
+            // console.log(categoriesVideoData.data)
+            dispatch(setHomeVideos(categoriesVideoData.data.items));
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     useEffect(() => {
-        fetchVideos();
-    }, []);
+        if (category == "All") {
+            fetchVideos();
+        } else {
+            fetchVideosByCategory();
+        }
+    }, [category]);
 
     return (
         <div className={`w-full grid grid-cols-3 gap-6 `}>
@@ -25,7 +41,7 @@ const Videos = () => {
                 allVideos.map((video) => {
                     // console.log(video.id)
                     return (
-                        <Link className={`flex `} to={`/watch?v=${video.id}`} key={video.id}>
+                        <Link className={`flex `} to={`/watch?v=${typeof video.id == "object" ? video?.id?.videoId : video?.id}`} key={typeof video.id == "object" ? video?.id?.videoId : video?.id}>
                             <VideoCart props={video} />
                         </Link>
                     )

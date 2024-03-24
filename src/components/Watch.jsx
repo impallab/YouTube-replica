@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState, useRef } from 'react';
 import Avatar from 'react-avatar';
 import { useDispatch, useSelector } from 'react-redux';
-import { useSearchParams } from 'react-router-dom';
+import { NavLink, useSearchParams } from 'react-router-dom';
 import { BiSolidLike, BiSolidDislike } from "react-icons/bi";
 import { FaShare, FaEyeSlash } from "react-icons/fa";
 import { IoMdDownload } from "react-icons/io";
@@ -117,16 +117,16 @@ function Watch() {
                         <div className='flex justify-between'>
 
                             <div className='flex items-center' >
-                                <div>
-                                    <Avatar size='40' className='mx-1 mr-4 mt-1 rounded-full ' src={watchVideo?.snippet?.thumbnails?.maxres.url || watchVideo?.snippet?.thumbnails?.standard.url || watchVideo?.snippet?.thumbnails?.high.url || watchVideo?.snippet?.thumbnails?.defaul.url || ""} />
-                                </div>
+                                <NavLink>
+                                    <Avatar size='40' className='mx-1 mr-4 mt-1 rounded-full cursor-pointer' src={watchVideo?.snippet?.thumbnails?.maxres.url || watchVideo?.snippet?.thumbnails?.standard.url || watchVideo?.snippet?.thumbnails?.high.url || watchVideo?.snippet?.thumbnails?.defaul.url || ""} />
+                                </NavLink>
 
                                 <div>
-                                    <h3 className='text-blue-800 font-bold'>{watchVideo?.snippet?.channelTitle || "Title"}</h3>
+                                    <h3 className='text-blue-800 font-bold cursor-pointer'>{watchVideo?.snippet?.channelTitle || "Title"}</h3>
                                     <h3 className='text-white/55'>{formatCount(watchVideo?.statistics.viewCount || "0")} views</h3>
                                 </div>
 
-                                <div className=" ml-5 bg-white text-black p-2 font-semibold  px-5 rounded-full ">
+                                <div className=" ml-5 bg-white text-black p-2 font-semibold  px-5 rounded-full cursor-pointer ">
                                     Subscribe
                                 </div>
 

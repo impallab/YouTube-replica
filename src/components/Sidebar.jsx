@@ -152,7 +152,7 @@ const Sidebar = () => {
   const isOpen = useSelector((store) => store.app.isOpen);
 
   return (
-    <div className="fixed top-16">
+    <div className="fixed top-16 select-none z-10">
       <div
         className={`fixed top-0 left-0 h-screen  bg-black text-white font-bold transition-all duration-00 ${isOpen ? 'translate-x-0 w-[13.1vw]' : '-translate-x-50 w-[5.24vw]'
           } relative overflow-hidden`}
