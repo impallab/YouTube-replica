@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from 'react-avatar';
 import { FaMicrophoneAlt, FaYoutube } from "react-icons/fa";
 import { GiVideoCamera } from "react-icons/gi";
@@ -6,12 +6,16 @@ import { HiSwitchHorizontal } from "react-icons/hi";
 import { ImYoutube2 } from "react-icons/im";
 import { MdNotificationsActive, MdOutlineSearch } from "react-icons/md";
 import { useDispatch } from 'react-redux';
-import { toggleSidebar } from '../utils/appSlice';
+import { setCategoryVideos, toggleSidebar } from '../utils/appSlice';
 
 export default function Navbar() {
     const dispatch = useDispatch();
+    const [input, setInput] = useState("");
 
-
+    const searchVideos = () => {
+        dispatch(setCategoryVideos(input));
+        setInput("");
+    }
     const toggle = () => {
         dispatch(toggleSidebar())
     }
@@ -25,8 +29,8 @@ export default function Navbar() {
                 <ImYoutube2 className='text-6xl text-white ml-4 cursor-pointer' />
             </div>
             <div className='flex items-center p-3'>
-                <input type="text" placeholder='search' className='bg-black/5 border border-white/20 rounded-l-full outline-none p-1 px-5 h-10 w-[29rem]' />
-                <button className=' text-white bg-white/25 h-10 px-6 border border-white/25 rounded-r-full mr-4'>
+                <input type="text" value={input} onChange={(event) => setInput(event.target.value)} placeholder='search' className='bg-black/5 border border-white/20 rounded-l-full outline-none p-1 px-5 h-10 w-[29rem]' />
+                <button onClick={searchVideos} className=' text-white bg-white/25 h-10 px-6 border border-white/25 rounded-r-full mr-4'>
                     <MdOutlineSearch />
                 </button>
                 <span className=' bg-white/25 border border-white/35 rounded-full p-2.5 cursor-pointer'>
