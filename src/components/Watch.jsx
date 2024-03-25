@@ -73,7 +73,7 @@ function Watch() {
     const sendMessage = (event) => {
         setMessage(event.target.value);
         dispatch(setMessages({ // reducer created in the liveChatSlice.
-            name: "pallab",
+            name: "Pallab",
             messages: message
         }));
         setMessage(""); //function for set the value from input. 
@@ -85,12 +85,12 @@ function Watch() {
     };
 
     const handleLikeClick = () => {
-        setLikeClicked(true);
+        setLikeClicked(!likeClicked);
         setDislikeClicked(false);
     };
 
     const handleDislikeClick = () => {
-        setDislikeClicked(true);
+        setDislikeClicked(!dislikeClicked);
         setLikeClicked(false);
     };
 
