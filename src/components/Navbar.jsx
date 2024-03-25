@@ -12,7 +12,7 @@ import axios from 'axios';
 export default function Navbar() {
     const dispatch = useDispatch();
     const [input, setInput] = useState("");
-    const [showSuggestion, setShowSuggestion] = useState(false); 
+    const [showSuggestion, setShowSuggestion] = useState(false);
     const { searchSuggestion } = useSelector((store) => store.app);
 
     const searchVideos = () => {
@@ -39,7 +39,13 @@ export default function Navbar() {
     }
 
     useEffect(() => {
-        giveSuggestion();
+        const timer = setTimeout(() => {
+            giveSuggestion();
+        }, 400);
+
+        return () => {
+            clearTimeout(timer);
+        }
     }, [input]);
 
     return (
