@@ -30,6 +30,11 @@ export default function Navbar() {
         }
     }
 
+    const acceptSuggestion = (suggestion) => {
+        setInput(suggestion);
+        searchVideos();
+    }
+
     useEffect(() => {
         giveSuggestion()
     }, [input])
@@ -42,18 +47,19 @@ export default function Navbar() {
                 <FaYoutube className='text-red-600 ml-8 mr-1 cursor-pointer' />
                 <ImYoutube2 className='text-6xl text-white ml-4 cursor-pointer' />
             </div>
-            <div className='flex items-center p-3'>
+            <div className='flex items-center p-3 relative'>
                 <input type="text" value={input} onChange={(event) => setInput(event.target.value)} placeholder='search' className='bg-black/5 border border-white/20 rounded-l-full outline-none p-1 px-5 h-10 w-[29rem]' />
                 <button onClick={searchVideos} className=' text-white bg-white/25 h-10 px-6 border border-white/25 rounded-r-full mr-4'>
                     <MdOutlineSearch />
                 </button>
 
-                {input != "" &&
-                    <div className={`bg-[#2e2c2c] absolute ml-1 mt-96 border border-white/45 p-2 w-[30vw] rounded-lg`}>
+                {
+                    (input && searchSuggestion.length !== 0) &&
+                    <div className={`bg-[#2e2c2c] absolute top-full left-5 border border-white/45 p-2 w-[30vw] rounded-lg -mt-2`}>
                         <ul>
                             {
                                 searchSuggestion.map((suggestion, index) => (
-                                    <div key={index} className='flex items-center gap-1 px-4 hover:bg-white/10 rounded-lg cursor-pointer'>
+                                    <div key={index} onClick={() => acceptSuggestion(suggestion)} className='flex items-center gap-1 px-4 hover:bg-white/10 rounded-lg cursor-pointer'>
                                         <MdOutlineSearch />
                                         <li className='px-2 py-1 font-medium  '>{suggestion}</li>
                                     </div>
