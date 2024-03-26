@@ -32,7 +32,6 @@ export const getRandomMessage = () => {
     return messages[randomIndex];
 };
 
-
 export const generateRandomName = () => {
     const maleFirstNames = [
         "Aditya", "Arjun", "Arnav", "Ayaan", "Dhruv", "Ishaan", "Kabir", "Krish", "Neel", "Aarav", "Aarav🦁", "Aryan⚡", "Rohan🐼", "Vihaan🌟", "Arjun🦊", "Pallab🍃", "Biplab🌿", "Surajit🌞", "Mounojit🏞️", "Sujan🌱", "Shiba🕉️", "Sagar🌊", "Sachin🏏", "Anubhab🎭", "Bappa🌟", "Subhajit🎨", "Sudip🎵", "Rahul🏏", "Rupam🌹", "Rajesh🤵", "Pritam🎶", "Akash☁️", "Subhankar🚀",

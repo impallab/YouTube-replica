@@ -8,6 +8,7 @@ import { setHomeVideos } from '../utils/appSlice';
 const Videos = () => {
     const { allVideos, category } = useSelector((store) => store.app);
     const dispatch = useDispatch()
+
     const fetchVideos = async () => {
         try {
             const videosData = await axios.get(`${import.meta.env.VITE_YOUTUBE_VIDEO_API_URL}${import.meta.env.VITE_YOUTUBE_VIDEO_API_KEY}`);
@@ -17,6 +18,7 @@ const Videos = () => {
             console.log("Failed to fetch data : ", error);
         }
     };
+
     const fetchVideosByCategory = async () => {
         try {
             const categoriesVideoData = await axios.get(`${import.meta.env.VITE_YOUTUBE_VIDEO_BY_KEYWORD}${category}&type=video&key=${import.meta.env.VITE_YOUTUBE_VIDEO_API_KEY}`);
@@ -36,17 +38,16 @@ const Videos = () => {
     }, [category]);
 
     return (
-        <div className={`w-full grid grid-cols-3 gap-6 `}>
-            {
-                allVideos.map((video) => {
-                    // console.log(video.id)
-                    return (
-                        <Link className={`flex `} to={`/watch?v=${typeof video.id == "object" ? video?.id?.videoId : video?.id}`} key={typeof video.id == "object" ? video?.id?.videoId : video?.id}>
-                            <VideoCart props={video} />
-                        </Link>
-                    )
-                })
-            }
+        <div className="w-full gap-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
+            {allVideos.map((video) => (
+                <Link
+                    className="flex"
+                    to={`/watch?v=${video?.id?.videoId || video?.id}`}
+                    key={typeof video.id === "object" ? video?.id?.videoId : video?.id}
+                >
+                    <VideoCart props={video} />
+                </Link>
+            ))}
         </div>
     );
 };

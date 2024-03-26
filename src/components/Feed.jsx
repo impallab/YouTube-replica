@@ -6,11 +6,11 @@ const Feed = () => {
     return (
         <>
             <div className='overflow-x-hidden'>
-                <div className={`flex overflow-x-scroll whitespace-nowrap buttons selection:false ${isOpen ? "px-60" : "px-32"}`}>
+                <div className={`flex overflow-x-scroll whitespace-nowrap buttons selection:false ${isOpen ? "px-60" : "px-4 sm:px-20"}`}>
                     <Buttons />
                 </div>
             </div>
-            <div className={`relative overflow-y-auto mr-4 mt-10 ${isOpen ? "ml-60" : "ml-28"}`}>
+            <div className={`relative overflow-y-auto mr-4 mt-10 ${isOpen ? "ml-4 sm:ml-60 md:ml-64" : "ml-4 sm:ml-28 "}`}>
                 <Videos />
             </div>
         </>

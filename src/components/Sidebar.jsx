@@ -64,10 +64,6 @@ const sidebarItems = [
     title: "Home"
   },
   {
-    icons: <SiYoutubeshorts />,
-    title: "Shorts"
-  },
-  {
     icons: <MdOutlineSubscriptions />,
     title: "Subscriptions"
   },
@@ -76,68 +72,12 @@ const sidebarItems = [
     title: "Home"
   },
   {
-    icons: <SiYoutubeshorts />,
-    title: "Shorts"
-  },
-  {
     icons: <MdOutlineSubscriptions />,
     title: "Subscriptions"
   },
   {
     icons: <RiHomeHeartLine />,
     title: "Home"
-  },
-  {
-    icons: <SiYoutubeshorts />,
-    title: "Shorts"
-  },
-  {
-    icons: <MdOutlineSubscriptions />,
-    title: "Subscriptions"
-  },
-  {
-    icons: <RiHomeHeartLine />,
-    title: "Home"
-  },
-  {
-    icons: <SiYoutubeshorts />,
-    title: "Shorts"
-  },
-  {
-    icons: <MdOutlineSubscriptions />,
-    title: "Subscriptions"
-  },
-  {
-    icons: <RiHomeHeartLine />,
-    title: "Home"
-  },
-  {
-    icons: <SiYoutubeshorts />,
-    title: "Shorts"
-  },
-  {
-    icons: <MdOutlineSubscriptions />,
-    title: "Subscriptions"
-  },
-  {
-    icons: <RiHomeHeartLine />,
-    title: "Home"
-  },
-  {
-    icons: <SiYoutubeshorts />,
-    title: "Shorts"
-  },
-  {
-    icons: <MdOutlineSubscriptions />,
-    title: "Subscriptions"
-  },
-  {
-    icons: <RiHomeHeartLine />,
-    title: "Home"
-  },
-  {
-    icons: <SiYoutubeshorts />,
-    title: "Shorts"
   },
   {
     icons: <MdOutlineSubscriptions />,
@@ -152,34 +92,45 @@ const Sidebar = () => {
   const isOpen = useSelector((store) => store.app.isOpen);
 
   return (
-    <div className="fixed top-16 select-none z-10">
+    <div className="fixed top-16 select-none z-10 ">
       <div
-        className={`fixed top-0 left-0 h-screen  bg-black text-white font-bold transition-all duration-00 ${isOpen ? 'translate-x-0 w-[13.1vw]' : '-translate-x-50 w-[5.24vw]'
+        className={`fixed top-0 left-0 h-screen bg-black text-white font-bold transition-all duration-300 ${isOpen ? 'translate-x-0 w-[55vw] sm:w-[30vw] md:w-[25vw] lg:w-[16vw]   ' : 'translate-x-0 w-0 sm:w-16'
           } relative overflow-hidden`}
       >
         <div
           className={`absolute inset-0 bg-white/40 transition-all duration-1000 ${isOpen ? 'h-full ' : 'h-full'
             } flex justify-center overflow-hidden`}
         >
-          <div
-            className={`w-full h-full bg-black/45 waterflow-open`}
-          >
-            <div className={`water-drop h-[14%] w-[92%] ${isOpen ? "border border-cyan-300 rounded-full bg-black shadow shadow-cyan-200" : "border border-white rounded-full bg-red-600 shadow-white"} absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full opacity-0`}></div>
+          <div className={`w-full h-full bg-black/45 waterflow-open`}>
+            <div
+              className={`water-drop h-[14%] w-[92%] ${isOpen
+                ? "border border-cyan-300 rounded-full bg-black shadow shadow-cyan-200"
+                : "border border-white rounded-full bg-red-600 shadow-white"
+                } absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full opacity-0`}
+            ></div>
           </div>
         </div>
-        <div className={`sidebar overflow-y-scroll overflow-x-hidden absolute h-screen`}>
-          {
-            sidebarItems.map((item, index) => {
-              return (
-                <div key={index} className='flex items-center  m-6 '>
-                  <NavLink to="" className='text-2xl cursor-pointer'>{item.icons}</NavLink>
-                  <NavLink to={item.path} className={`ml-5 cursor-pointer ${isOpen ? "" : "hidden"}`}>{item.title}</NavLink>
-                </div>
-              )
-            })
-          }
+        <div
+          className={`sidebar overflow-y-auto overflow-x-hidden absolute h-[100vh] ${isOpen ? 'w-full' : 'w-full'
+            }`}
+        >
+          {sidebarItems.map((item, index) => (
+            <div key={index} className="flex items-center m-[2vh]">
+              <NavLink to="" className="text-2xl cursor-pointer">
+                {item.icons}
+              </NavLink>
+              <NavLink
+                to={item.path}
+                className={`ml-5 cursor-pointer ${isOpen ? "" : "hidden"}`}
+              >
+                {item.title}
+              </NavLink>
+            </div>
+          ))}
         </div>
       </div>
+
+
 
       <style>{`
         .waterflow-open {

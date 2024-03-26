@@ -14,6 +14,7 @@ import EmojiPicker from 'emoji-picker-react';
 import { usePopper } from 'react-popper';
 import LiveChat from './LiveChat';
 import { setMessages } from '../utils/liveChatSlice';
+import { Feed } from '.';
 
 function Watch() {
     const isOpen = useSelector((store) => store.app.isOpen);
@@ -96,8 +97,9 @@ function Watch() {
 
 
     return (
-        <div className='flex w-[100%]'>
-            <div className='video w-[75%]'>
+
+        <div className='flex flex-col sm:flex-row w-full'>
+            <div className='video w-full sm:w-3/4'>
                 <div className={`mt-20 ${isOpen ? "ml-56" : "ml-32"}`}>
                     <div className='inline-block  '>
                         <div className='animated-border rounded-lg'>
@@ -162,7 +164,7 @@ function Watch() {
                 )}
 
                 {showChat && (
-                    <div className=' '>
+                    <div className=''>
                         <div className='flex justify-between font-semibold mx-2'>
                             <h4 className='m-3'>Top Chat</h4>
                             <div className='items-center'>
@@ -177,7 +179,7 @@ function Watch() {
                         <div className='livechat overflow-y-auto h-[63vh] border-y bg-black/5 border-white/20 p-2 flex flex-col-reverse'>
                             <LiveChat />
                         </div>
-                        <div className='justify-between flex pt-2 relative' >
+                        <div className='w-full justify-between flex pt-2 relative' >
                             <div className='bg-white/10 pt-2 mr-4 w-[85%] border border-white/25 rounded-full'>
                                 <input
                                     type="text"
@@ -210,6 +212,8 @@ function Watch() {
                 )}
             </div>
         </div>
+
+
     );
 }
 
