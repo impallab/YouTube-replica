@@ -92,13 +92,13 @@ const Sidebar = () => {
   const isOpen = useSelector((store) => store.app.isOpen);
 
   return (
-    <div className="fixed top-16 select-none z-10 ">
+    <div className="fixed top-[59px]  select-none z-10 ">
       <div
-        className={`fixed top-0 left-0 h-screen bg-black text-white font-bold transition-all duration-300 ${isOpen ? 'translate-x-0 w-[55vw] sm:w-[30vw] md:w-[25vw] lg:w-[16vw]   ' : 'translate-x-0 w-0 sm:w-16'
+        className={`fixed top-0 left-0 h-screen bg-black text-white font-bold transition-all duration-300 ${isOpen ? 'translate-x-0 w-[100vw] xs:w-[60vw] mds:w-[50vw] sm:w-[35vw] md:w-[25vw] lg:w-[17vw]   ' : 'translate-x-0 w-0 md:w-16'
           } relative overflow-hidden`}
       >
         <div
-          className={`absolute inset-0 bg-white/40 transition-all duration-1000 ${isOpen ? 'h-full ' : 'h-full'
+          className={`absolute inset-0 bg-white/40 transition-all duration-1500 ${isOpen ? 'h-full ' : 'h-full'
             } flex justify-center overflow-hidden`}
         >
           <div className={`w-full h-full bg-black/45 waterflow-open`}>
@@ -115,13 +115,13 @@ const Sidebar = () => {
             }`}
         >
           {sidebarItems.map((item, index) => (
-            <div key={index} className="flex items-center m-[2vh]">
-              <NavLink to="" className="text-2xl cursor-pointer">
+            <div key={index} className="flex items-center m-[2vh] my-[5vh]">
+              <NavLink to="" className={`text-2xl md:text-2xl lg cursor-pointer `}>
                 {item.icons}
               </NavLink>
               <NavLink
                 to={item.path}
-                className={`ml-5 cursor-pointer ${isOpen ? "" : "hidden"}`}
+                className={`ml-5 cursor-pointer md:text-md ${isOpen ? "" : "hidden"}`}
               >
                 {item.title}
               </NavLink>

@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from 'react';
 import Avatar from 'react-avatar';
 import formatCount from "../utils/formatCounter";
+// import Duration from "./Duration";
 
 const VideoCart = ({ props }) => {
     //fetch channelIcon:
@@ -11,7 +12,7 @@ const VideoCart = ({ props }) => {
         try {
             const channelData = await axios.get(`${import.meta.env.VITE_YOUTUBE_VIDEO_BY_ID}${props.snippet.channelId}&key=${import.meta.env.VITE_YOUTUBE_VIDEO_API_KEY}`);
             // fetch each channels details.
-            // console.log(res)
+            // console.log(channelData)
             setChannelIcon(channelData.data?.items[0]?.snippet?.thumbnails?.high?.url || channelData.data?.items[0]?.snippet?.thumbnails?.default.url || "");
         } catch (error) {
             console.log(error)
@@ -36,6 +37,11 @@ const VideoCart = ({ props }) => {
                 alt="thumnail"
                 className="rounded-2xl w-full"
             />
+            {/* {
+                props?.lengthSeconds && (
+                    <Duration time={props?.lengthSeconds} />
+                )
+            } */}
             <div className="flex gap-3 p-2 font-bold">
                 <div>
                     <Avatar src={channelIcon} size="37" className="rounded-full" />

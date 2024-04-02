@@ -22,7 +22,7 @@ const Videos = () => {
     const fetchVideosByCategory = async () => {
         try {
             const categoriesVideoData = await axios.get(`${import.meta.env.VITE_YOUTUBE_VIDEO_BY_KEYWORD}${category}&type=video&key=${import.meta.env.VITE_YOUTUBE_VIDEO_API_KEY}`);
-            // console.log(categoriesVideoData.data)
+            console.log(categoriesVideoData.data)
             dispatch(setHomeVideos(categoriesVideoData.data.items));
         } catch (error) {
             console.log(error)
@@ -38,7 +38,7 @@ const Videos = () => {
     }, [category]);
 
     return (
-        <div className="w-full gap-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
+        <div className=" w-full gap-6 grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {allVideos.map((video) => (
                 <Link
                     className="flex"

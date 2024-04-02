@@ -9,7 +9,8 @@
 }
 
 .livechat::-webkit-scrollbar-thumb,
-.sidebar::-webkit-scrollbar-thumb {
+.sidebar::-webkit-scrollbar-thumb,
+.videos::-webkit-scrollbar-thumb {
     height: 3rem;
     /* not working for sidebar scrollbar height  */
     background: linear-gradient(to bottom, red, cyan);
