@@ -3,3 +3,5 @@
   to = "https://clients1.google.com/:splat"
   status = 200
   force = true
+
+/*    /index.html    200
