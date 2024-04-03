@@ -25,21 +25,21 @@ export default function Navbar() {
     }
 
     const giveSuggestion = async () => {
-  try {
-    const res = await axios.get(`${import.meta.env.VITE_YOUTUBE_SEARCH_SUGGESSION_API}${input}`);
-    console.log(res.data); // Log the raw response data
-
-    // Use a regular expression to extract the suggestions
-    const suggestionRegex = /\["(.*?)"/g;
-    const suggestionArray = res.data.match(suggestionRegex).slice(1).map((str) => str.slice(1, -1));
-
-    console.log(suggestionArray);
-    dispatch(setSearchSuggesion(suggestionArray));
-  } catch (error) {
-    console.log(error);
-  }
-}
-
+        try {
+          const res = await axios.get(`/suggestion/complete/search?client=youtube&gs_ri=youtube&ds=yt&q=${input}`);
+          console.log(res.data); // Log the raw response data
+      
+          // Use a regular expression to extract the suggestions
+          const suggestionRegex = /\["(.*?)"/g;
+          const suggestionArray = res.data.match(suggestionRegex).slice(1).map((str) => str.slice(1, -1));
+      
+          console.log(suggestionArray);
+          dispatch(setSearchSuggesion(suggestionArray));
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      
     const acceptSuggestion = async (suggestion) => {
         setInput(suggestion);
         setShowSuggestion(false); // Hide suggestion chart
@@ -67,7 +67,7 @@ export default function Navbar() {
     useEffect(() => {
         const timer = setTimeout(() => {
             giveSuggestion();
-        }, 400);
+        }, 600);
 
         return () => {
             clearTimeout(timer);
