@@ -174,7 +174,7 @@ export default function Navbar() {
                     <MdNotificationsActive className='hidden sm:block' />
                     <span className='hidden text-xs absolute  translate-x-1/2 -translate-y-1/2 bg-red-700 text-white rounded-full w-6 h-6 sm:flex font-semibold items-center justify-center  '>9+</span>
                 </div>
-                <Avatar src='https://scontent.fccu2-3.fna.fbcdn.net/v/t39.30808-6/431009268_1819586721819559_8166665112089281255_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=ax5ZfpFhHegAb6rJAaM&_nc_ht=scontent.fccu2-3.fna&oh=00_AfDcBxKtYPtv_ePAPq2evHmpX_n4tEgwvjB0dUKJM52XtQ&oe=66135D6F' size={39} className='rounded-full' />
+                <Avatar src='https://avatars.githubusercontent.com/u/116993164?s=80' size={39} className='rounded-full' />
             </div>
         </div>
     );
