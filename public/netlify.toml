@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/suggestion/*"
+  to = "https://clients1.google.com/:splat"
+  status = 200
+  force = true
