@@ -1,7 +1,2 @@
-[[redirects]]
-  from = "/suggestion/*"
-  to = "https://clients1.google.com/:splat"
-  status = 200
-  force = true
-
+/suggestion/*    https://clients1.google.com/:splat    200
 /*    /index.html    200
