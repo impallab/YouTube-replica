@@ -1,13 +1,12 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Avatar from 'react-avatar';
-import { FaMicrophoneAlt, FaYoutube } from "react-icons/fa";
+import { FaYoutube } from "react-icons/fa";
 import { GiVideoCamera } from "react-icons/gi";
 import { HiSwitchHorizontal } from "react-icons/hi";
-import { ImYoutube2 } from "react-icons/im";
 import { MdNotificationsActive, MdOutlineSearch } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';
 import { setHomeVideos, setSearchSuggesion, toggleSidebar } from '../utils/appSlice';
-import axios from 'axios';
 
 export default function Navbar() {
     const dispatch = useDispatch();
@@ -26,20 +25,20 @@ export default function Navbar() {
     }
 
     const giveSuggestion = async () => {
-        try {
-            const res = await axios.get(`${import.meta.env.VITE_YOUTUBE_SEARCH_SUGGESSION_API}${input}`);
-            //   console.log(res.data); // Log the raw response data
+  try {
+    const res = await axios.get(`${import.meta.env.VITE_YOUTUBE_SEARCH_SUGGESSION_API}${input}`);
+    console.log(res.data); // Log the raw response data
 
-            // Use a regular expression to extract the suggestions
-            const suggestionRegex = /\["(.*?)"/g;
-            const suggestionArray = res.data.match(suggestionRegex).slice(1).map((str) => str.slice(1, -1));
+    // Use a regular expression to extract the suggestions
+    const suggestionRegex = /\["(.*?)"/g;
+    const suggestionArray = res.data.match(suggestionRegex).slice(1).map((str) => str.slice(1, -1));
 
-            console.log(suggestionArray);
-            dispatch(setSearchSuggesion(suggestionArray));
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    console.log(suggestionArray);
+    dispatch(setSearchSuggesion(suggestionArray));
+  } catch (error) {
+    console.log(error);
+  }
+}
 
     const acceptSuggestion = async (suggestion) => {
         setInput(suggestion);
